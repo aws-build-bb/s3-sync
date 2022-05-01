@@ -3,7 +3,7 @@
 Sync AWS S3 storage from one account to another account in whatever file type.
 
 
-![S3 Sync](s3_sync/images/example.png)
+![S3 Sync](https://raw.githubusercontent.com/FerdinaKusumah/s3-sync/master/s3_sync/images/example.png)
 
 ## Installation
 ```shell
