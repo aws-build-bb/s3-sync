@@ -13,6 +13,7 @@ class BotoWrapperSchema:
 
 class StorageSchema(BaseModel):
     connection: Optional[BotoWrapperSchema]
+    path: Optional[str]
     bucket_name: Optional[str]
     region_name: Optional[str]
     aws_access_key_id: Optional[str]
