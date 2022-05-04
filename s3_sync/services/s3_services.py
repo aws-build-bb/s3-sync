@@ -1,6 +1,6 @@
 from pathlib import Path
-from typing import ClassVar, Callable
-from typing import Dict, Any
+from typing import ClassVar
+from typing import Dict
 
 import boto3
 import tqdm

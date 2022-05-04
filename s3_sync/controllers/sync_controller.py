@@ -1,9 +1,8 @@
 from typing import Dict, ClassVar
 
-import tqdm
-
 from s3_sync.schemas import StorageSchema, SyncObject
 from s3_sync.services import S3SyncServices
+from s3_sync.utils import scan_object
 
 
 class SyncController:
@@ -84,7 +83,7 @@ class SyncController:
 
     def start_sync_server_to_local(self, data: Dict[str, SyncObject]) -> None:
         """sync all data from source to target
-        fetch all data from source and upload to target
+        fetch all data from source and upload to path target
         :return: none
         """
 
@@ -94,6 +93,20 @@ class SyncController:
             return None
 
         _ = list(map(sync_server_to_local, data.values()))
+        return None
+
+    def start_sync_local_to_server(self, data: Dict[str, SyncObject]) -> None:
+        """sync all data from source to target
+        fetch all data from source path and upload to target
+        :return: none
+        """
+
+        def sync_local_to_server(sync_data: SyncObject) -> None:
+            # start download data from source target bucket to local data
+            self.services.upload_target_files(sync_data)
+            return None
+
+        _ = list(map(sync_local_to_server, data.values()))
         return None
 
     def sync(
@@ -112,4 +125,6 @@ class SyncController:
             return self.start_sync_server_to_local(self.services.get_source_object())
 
         if local_to_server:
-            raise NotImplementedError
+            return self.start_sync_local_to_server(
+                scan_object(self.data_source.path, self.data_target.bucket_name)
+            )

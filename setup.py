@@ -15,7 +15,7 @@ README = (HERE / "README.md").read_text()
 # This call to setup() does all the work
 setup(
     name="s3_sync",
-    version="0.2.1",
+    version="0.3.1",
     description="Sync s3 from one source to another place",
     entry_points={"console_scripts": ["s3-sync=s3_sync:main"]},
     long_description=README,

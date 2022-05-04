@@ -116,4 +116,53 @@ target:
 
 * Then execute command `s3-sync --sync-server-local true -yml ./whatever.yml` or `s3-sync --sync-server-local true -yaml ./whatever.yaml`
 
+
+
+## S3 sync local to s3
+
+### Read from parameters
+```shell
+    s3-sync --sync-local-server true \
+        --source-local-path "/Users/ferdinakusumah/foo/bar/s3-sync/sync-data" \
+        
+        --target-bucket-name foo \
+        --target-region-name ap-southeast-1 \
+        --target-access-key-id bar \
+        --target-secret-access foobar
+```
+
+### Read from json file
+* Create example json file as bellow example, you can name this file whatever
+
+```json
+{
+  "source": {
+    "path": "/Users/ferdinakusumah/foo/bar/s3-sync/sync-data"
+  },
+  "target": {
+    "bucket_name": "foo",
+    "region_name": "ap-southeast-1",
+    "aws_access_key_id": "bar",
+    "aws_secret_access_key": "foobar"
+  }
+}
+```
+
+* Then execute command `s3-sync --sync-local-server true -json ./whatever.json`
+
+### Read from yml or yaml file
+* Create example json file as bellow example, you can name this file whatever
+
+```yaml
+source:
+  path: /Users/ferdinakusumah/foo/bar/s3-sync/sync-data
+target:
+  bucket_name: foo
+  region_name: ap-southeast-1
+  aws_access_key_id: bar
+  aws_secret_access_key: foobar
+```
+
+* Then execute command `s3-sync --sync-local-server true -yml ./whatever.yml` or `s3-sync --sync-local-server true -yaml ./whatever.yaml`
+
 ### Pull Request are welcome
