@@ -1,7 +1,7 @@
 import os
 import io
 from typing import Any
-
+from pathlib import Path
 from s3sync.schemas import LocalConfig
 from s3sync.services.interface import BucketInterface
 
@@ -43,6 +43,8 @@ class LocalServices(BucketInterface):
 
     def upload_file(self, body: io.BytesIO, file_name: str) -> None:
         full_path = os.path.join(self.config.path, file_name)
+        # create path if not exists
+        Path(self.config.path).mkdir(parents=True, exist_ok=True)
         with open(full_path, "wb") as file:
             file.write(body.read())
 

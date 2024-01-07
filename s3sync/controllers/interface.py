@@ -1,6 +1,5 @@
 from abc import ABC, abstractmethod
 
-from s3sync.repository.interface import RepositoryInterface
 from s3sync.services.interface import BucketInterface
 
 
@@ -8,7 +7,6 @@ class SyncInterface(ABC):
     @abstractmethod
     def init_connection(
         self,
-        repo: RepositoryInterface,
         source: BucketInterface,
         target: BucketInterface,
         **kwargs,

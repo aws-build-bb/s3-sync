@@ -9,7 +9,6 @@ from s3sync.controllers import (
     LocalToS3Provider,
     SyncManager,
 )
-from s3sync.repository import TinyDbRepository
 from s3sync.schemas import S3Config, LocalConfig
 from s3sync.services import S3Services, LocalServices
 
@@ -128,14 +127,10 @@ def main():
 
     args = parser.parse_args()
 
-    # define db as in memory db
-    repo = TinyDbRepository.init_connection()
-
     match (args.sync_s3_bucket, args.sync_s3_local, args.sync_local_s3):
         case (True, _, _):
             source_param, target_param = parse_args_s3_bucket(args)
             provider = S3ToS3Provider.init_connection(
-                db=repo,
                 source=S3Services.init_connection(source_param),
                 target=S3Services.init_connection(target_param),
                 thread=args.thread,
@@ -144,7 +139,6 @@ def main():
         case (_, True, _):
             source_param, target_param = parse_args_s3_local(args)
             provider = S3ToLocalProvider.init_connection(
-                db=repo,
                 source=S3Services.init_connection(source_param),
                 target=LocalServices.init_connection(target_param),
                 thread=args.thread,
@@ -153,7 +147,6 @@ def main():
         case (_, _, True):
             source_param, target_param = parse_args_local_s3(args)
             provider = LocalToS3Provider.init_connection(
-                db=repo,
                 source=LocalServices.init_connection(source_param),
                 target=S3Services.init_connection(target_param),
                 thread=args.thread,

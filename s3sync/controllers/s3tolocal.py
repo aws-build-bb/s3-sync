@@ -3,7 +3,6 @@ from typing import Any
 
 from tqdm import tqdm
 from s3sync.controllers.interface import SyncInterface
-from s3sync.repository.interface import RepositoryInterface
 from s3sync.services.interface import BucketInterface
 from s3sync.utils import chunks
 
@@ -11,12 +10,10 @@ from s3sync.utils import chunks
 class S3ToLocalProvider(SyncInterface):
     def __init__(
         self,
-        db: RepositoryInterface,
         source: BucketInterface,
         target: BucketInterface,
         **kwargs,
     ):
-        self.db = db
         self.source = source
         self.target = target
         self.thread = kwargs["thread"]
@@ -24,12 +21,11 @@ class S3ToLocalProvider(SyncInterface):
     @classmethod
     def init_connection(
         cls,
-        db: RepositoryInterface,
         source: BucketInterface,
         target: BucketInterface,
         **kwargs,
     ):
-        return cls(db, source, target, **kwargs)
+        return cls(source, target, **kwargs)
 
     def sync(self, payload: tuple[int, list[dict[str, Any]]]):
         pid, data = payload
