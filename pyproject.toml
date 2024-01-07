@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "s3sync"
-version = "0.1.0"
+version = "0.1.1"
 description = "Sync s3 from one source to another place"
 authors = ["Ferdina Kusumah <ferdina.kusumah@gmail.com>"]
 license = "MIT"
