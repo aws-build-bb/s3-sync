@@ -2,6 +2,7 @@ from concurrent.futures import ThreadPoolExecutor
 from typing import Any
 
 from tqdm import tqdm
+
 from s3sync.controllers.interface import SyncInterface
 from s3sync.services.interface import BucketInterface
 from s3sync.utils import chunks

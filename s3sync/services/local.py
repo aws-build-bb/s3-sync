@@ -1,7 +1,8 @@
-import os
 import io
-from typing import Any
+import os
 from pathlib import Path
+from typing import Any
+
 from s3sync.schemas import LocalConfig
 from s3sync.services.interface import BucketInterface
 
