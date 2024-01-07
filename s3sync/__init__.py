@@ -129,6 +129,7 @@ def main():
 
     # define db as in memory db
     repo = TinyDbRepository.init_connection()
+
     match (args.sync_s3_bucket, args.sync_s3_local, args.sync_local_s3):
         case (True, _, _):
             source_param, target_param = parse_args_s3_bucket(args)

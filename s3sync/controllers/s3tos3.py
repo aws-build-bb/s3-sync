@@ -24,4 +24,4 @@ class S3ToS3Provider(SyncInterface):
         return cls(db, source, target)
 
     def sync_bucket(self):
-        print("masuk")
+        pass
