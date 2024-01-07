@@ -1,9 +1,9 @@
 # s3-sync
 
 Sync AWS S3 storage:
-* From s3 -> s3
-* FROM s3 -> local storage
-* FROM local storage -> s3
+* Sync file from s3 -> s3
+* Sync file from s3 -> local storage
+* Sync file from local storage -> s3
 
 ## Installation
 ```shell
