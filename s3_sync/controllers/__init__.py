@@ -1,1 +1,0 @@
-from s3_sync.controllers.sync_controller import SyncController

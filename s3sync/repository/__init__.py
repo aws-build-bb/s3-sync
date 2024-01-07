@@ -1,0 +1,1 @@
+from s3sync.repository.tinydb_repo import TinyDbRepository

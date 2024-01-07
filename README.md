@@ -11,7 +11,7 @@ Sync AWS S3 storage:
 ## Installation
 
 ```shell
-  pip install s3_sync
+  pip install s3sync
 ```
 
 ## S3 sync s3 to s3
