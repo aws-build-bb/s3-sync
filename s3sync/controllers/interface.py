@@ -11,6 +11,7 @@ class SyncInterface(ABC):
         repo: RepositoryInterface,
         source: BucketInterface,
         target: BucketInterface,
+        **kwargs,
     ):
         raise NotImplementedError
 

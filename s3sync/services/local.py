@@ -1,4 +1,5 @@
-import os.path
+import os
+import io
 from typing import Any
 
 from s3sync.schemas import LocalConfig
@@ -23,7 +24,7 @@ class LocalServices(BucketInterface):
 
             for file in files:
                 path_file = os.path.join(root_dir, file)
-                ret.append({"key": path_file})
+                ret.append({"Key": path_file})
 
         return ret
 
@@ -33,16 +34,17 @@ class LocalServices(BucketInterface):
 
     def get_detail_file(self, file_name: str) -> dict[str, Any]:
         full_path = os.path.join(self.config.path, file_name)
-        resp = {"key": full_path}
+        n = len(self.config.path) + 1
+        resp = {"Key": full_path[n:]}
         with open(full_path, "rb") as file:
-            resp["Body"] = file.read()
+            resp["Body"] = io.BytesIO(file.read())
 
         return resp
 
-    def upload_file(self, body: bytes, file_name: str) -> None:
+    def upload_file(self, body: io.BytesIO, file_name: str) -> None:
         full_path = os.path.join(self.config.path, file_name)
         with open(full_path, "wb") as file:
-            file.write(body)
+            file.write(body.read())
 
         return None
 

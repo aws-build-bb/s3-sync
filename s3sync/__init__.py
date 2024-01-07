@@ -124,6 +124,7 @@ def main():
     parser.add_argument("-ss3", "--sync-s3-bucket", type=bool, default=False)
     parser.add_argument("-ssl", "--sync-s3-local", type=bool, default=False)
     parser.add_argument("-sls", "--sync-local-s3", type=bool, default=False)
+    parser.add_argument("-th", "--thread", type=int, default=2)
 
     args = parser.parse_args()
 
@@ -137,6 +138,7 @@ def main():
                 db=repo,
                 source=S3Services.init_connection(source_param),
                 target=S3Services.init_connection(target_param),
+                thread=args.thread,
             )
 
         case (_, True, _):
@@ -145,6 +147,7 @@ def main():
                 db=repo,
                 source=S3Services.init_connection(source_param),
                 target=LocalServices.init_connection(target_param),
+                thread=args.thread,
             )
 
         case (_, _, True):
@@ -153,6 +156,7 @@ def main():
                 db=repo,
                 source=LocalServices.init_connection(source_param),
                 target=S3Services.init_connection(target_param),
+                thread=args.thread,
             )
 
         case _:
