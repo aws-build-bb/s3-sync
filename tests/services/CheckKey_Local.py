@@ -16,7 +16,7 @@ finally:
 
 Check_Path = Path('/Library/BCG')
 
-if not Pal_Path.exists():
+if not Check_Path.exists():
     raise EnvironmentError("-Test Failed-")
 
 def enc(ba1, ba2):
